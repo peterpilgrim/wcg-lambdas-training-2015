@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 import static org.junit.Assert.*;
@@ -226,10 +227,40 @@ public class LambdaTrainingKata01 extends AbstractCodingKata {
         complete();
 
         // STUDENT: ---> Now ... Invoke these lambdas
-        // HINT:
         System.out.printf("index = %d\n", index.get());
     }
 
+    @Test
+    public void learn_about_binary_operations_01() {
+        BinaryOperator<Double> adder1 = (x, y) -> x + y;
+        BinaryOperator<Double> adder2 = (a, b) -> a + b;
+
+        complete();
+
+        // STUDENT: ---> Now ... Invoke these lambdas
+        // HINT:
+        // NOTE: compile weirdness. Force the compiler to understand literals are actually Double
+        // System.out.printf(" adder1.apply(2,3) = %8.3f\n", adder1.apply(2, 3) );
+        // System.out.printf(" adder1.apply(2.0,3.0) = %8.3f\n", adder1.apply(2.0, 3.0) );
+
+        // STUDENT: What happens here!?
+        assertThat(adder1, is(adder2));
+    }
 
 
+    @Test
+    public void learn_about_binary_operations_02() {
+        final BinaryOperator<Double> adder = (d1, d2) -> d1;
+        final BinaryOperator<Double> multiplier = (foo, bar) -> bar;
+
+        final LambdaArithmeticCalculator calculator = new LambdaArithmeticCalculator(adder, multiplier);
+
+        // STUDENT: ---> Now ... complete the unit test so that these methods pass
+        complete();
+
+        assertThat(calculator.add(1.234567, 2.345678), is(closeTo(3.5802, 0.0001)));
+        assertThat(calculator.multiply(2.5000, 4.0000), is(closeTo(10.000, 0.0001)));
+        assertThat(calculator.subtract(100.0, 75.750), is(closeTo(24.250, 0.0001)));
+        assertThat(calculator.divide(51.2321, 3.251), is(closeTo(15.7588, 0.0001)));
+    }
 }
