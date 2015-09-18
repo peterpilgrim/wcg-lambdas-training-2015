@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by ppilgrim on 17-Sep-2015.
  */
-public class LambdaTrainingKata02 extends AbstractCodingKata {
+public class LambdaTrainingKata02Test extends AbstractCodingKata {
 
     private WorkerTaskLibraryEngine workerEngine;
 

@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by ppilgrim on 17-Sep-2015.
  */
-public class LambdaTrainingKata01 extends AbstractCodingKata {
+public class LambdaTrainingKata01Test extends AbstractCodingKata {
 
     private WorkerTaskLibraryEngine workerEngine;
 

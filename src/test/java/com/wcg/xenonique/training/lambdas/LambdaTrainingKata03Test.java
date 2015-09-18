@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 /**
  * Created by ppilgrim on 17-Sep-2015.
  */
-public class LambdaTrainingKata03 extends AbstractCodingKata {
+public class LambdaTrainingKata03Test extends AbstractCodingKata {
 
     private WorkerTaskLibraryEngine workerEngine;
 
