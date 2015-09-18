@@ -3,7 +3,6 @@ package com.wcg.xenonique.training.lambdas;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.*;
 import java.util.concurrent.Callable;
