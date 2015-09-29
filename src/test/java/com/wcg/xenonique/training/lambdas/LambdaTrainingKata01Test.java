@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+ *
+ * Copyright (c) 2014,2015 by Peter Pilgrim, Milton Keynes, P.E.A.T UK LTD
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU GPL v3.0
+ * which accompanies this distribution, and is available at:
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * Developers:
+ * Peter Pilgrim -- design, development and implementation
+ *               -- Blog: http://www.xenonique.co.uk/blog/
+ *               -- Twitter: @peter_pilgrim
+ *
+ * Contributors:
+ *
+ *******************************************************************************/
+
 package com.wcg.xenonique.training.lambdas;
 
 import org.junit.Before;
@@ -15,6 +34,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 /**
+ *
  * Created by ppilgrim on 17-Sep-2015.
  */
 public class LambdaTrainingKata01Test extends AbstractCodingKata {
@@ -31,7 +51,7 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
         // NOTE: This is an important note
 
         // NOTE: COMMENT_OUT_THIS_LINE
-        complete();
+        incomplete();
 
         // Submit a work item to the engine.
         workerEngine.submitWorkItem(new Runnable() {
@@ -41,7 +61,7 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
             }
         });
 
-        // STUDENT: Where you see this prefix means that is an exercise or kata for you to complete!
+        // STUDENT: Where you see this prefix means that is an exercise or kata for you to incomplete!
     }
 
     @Test
@@ -49,7 +69,7 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
 
         // Submit a work item to the engine.
         // COMMENT_OUT_THIS_LINE
-        complete();
+        incomplete();
 
         // here is the compact way
         workerEngine.submitWorkItem(() -> System.out.println("do it"));
@@ -74,9 +94,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
 
         ActionListener buttonActionOneArgument = (event) -> System.out.println("Swing Button was click");
 
-        complete();
-
         // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
+
         //
         // Here is a big clue
         // noArguments.run();
@@ -105,11 +125,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
             // How do I invoke the inner Lambdas?
         };
 
-        complete();
         // STUDENT: ---> Now ... Invoke these lambdas
-        //
+        incomplete();
     }
-
 
     @Test
     public void learn_how_lambdas_can_return_values() {
@@ -118,9 +136,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
         Callable<Integer> randomElement = () -> (int)Math.rint(10000.0);
         Callable<Double> evaluateConstant = () -> Math.PI;
 
-        complete();
         // STUDENT: ---> Now ... Invoke these lambdas
-        //
+        incomplete();
+
     }
 
     @Test
@@ -129,8 +147,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
         Function<Integer,Integer> decrementer = (x) -> x - 1;
         Function<Integer,Integer> add10 = (x) -> x + 10;
 
-        complete();
         // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
+
         // HINT:
         // System.out.printf("incrementer.apply(4) = %d", incrementer.apply(4));
     }
@@ -142,12 +161,11 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
         Function<Double, Double> zoom10 = (x) -> x * 10;
         Function<Double, Double> unzoom10 = (x) -> x * 10;
 
-        complete();
         // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
+
         // HINT:
         // System.out.printf("incrementer.apply(4) = %d", incrementer.apply(4));
-
-
     }
 
     @Test
@@ -161,8 +179,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
 
         double value = 4;
 
-        complete();
         // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
+
         // HINT:
         //        for ( Function<Double, Double> operation: operationList ) {
         //            value = ...( ... );
@@ -193,12 +212,10 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
             }
         };
 
-
-        complete();
-
         // STUDENT: ---> Now ... Invoke these lambdas
-        // HINT:
+        incomplete();
 
+        // HINT:
         System.out.printf("index = %d\n", index);
     }
 
@@ -223,11 +240,48 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
             }
         };
 
+        // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
 
-        complete();
+        System.out.printf("index = %d\n", index.get());
+    }
+
+    @Test
+//    @Test( expected = SecurityException.class);
+    public void learn_lambas_functional_interfaces_04() throws Exception {
+
+        Callable<Double> f1 = () -> Math.PI;
+
+        Callable<Double> f2 = () -> {
+            // Thread.sleep() raises a checked exception. The Lambda does not force us to catch it. Why?
+            Thread.sleep(500);
+            return Math.PI * Math.E;
+        };
+
+        Callable<Double> f3 = () -> {
+            Thread.sleep(750);
+            return Math.random() * 127.0;
+        };
+
+        Callable<Double> f4 = () -> {
+            // What happens here.
+            try {
+                Thread.sleep(1250);
+                Runnable z = () -> {
+                    throw new SecurityException("You are not allowed!");
+                };
+                z.run();
+                return Math.random() * 127.0;
+            } catch (Throwable t) {
+                throw t;
+            }
+        };
 
         // STUDENT: ---> Now ... Invoke these lambdas
-        System.out.printf("index = %d\n", index.get());
+        incomplete();
+
+        // HINT: Uncomment the next line. Rinse and repeat
+        //System.out.printf("f1.call() = %8.4f\n", f1.call());
     }
 
     @Test
@@ -235,9 +289,9 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
         BinaryOperator<Double> adder1 = (x, y) -> x + y;
         BinaryOperator<Double> adder2 = (a, b) -> a + b;
 
-        complete();
-
         // STUDENT: ---> Now ... Invoke these lambdas
+        incomplete();
+
         // HINT:
         // NOTE: compile weirdness. Force the compiler to understand literals are actually Double
         // System.out.printf(" adder1.apply(2,3) = %8.3f\n", adder1.apply(2, 3) );
@@ -255,12 +309,14 @@ public class LambdaTrainingKata01Test extends AbstractCodingKata {
 
         final LambdaArithmeticCalculator calculator = new LambdaArithmeticCalculator(adder, multiplier);
 
-        // STUDENT: ---> Now ... complete the unit test so that these methods pass
-        complete();
+        // STUDENT: ---> Now ... incomplete the unit test so that these methods pass
+        incomplete();
 
         assertThat(calculator.add(1.234567, 2.345678), is(closeTo(3.5802, 0.0001)));
         assertThat(calculator.multiply(2.5000, 4.0000), is(closeTo(10.000, 0.0001)));
         assertThat(calculator.subtract(100.0, 75.750), is(closeTo(24.250, 0.0001)));
         assertThat(calculator.divide(51.2321, 3.251), is(closeTo(15.7588, 0.0001)));
     }
+
+
 }
